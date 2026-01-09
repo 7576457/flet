@@ -608,6 +608,8 @@ class TextField(FormFieldControl, AdaptiveControl):
 
     def before_update(self):
         super().before_update()
+        if not isinstance(self.value, str):
+            raise TypeError(f"value must be str, got {type(self.value).__name__}")
         if self.min_lines is not None and self.min_lines <= 0:
             raise ValueError("min_lines must be greater than 0")
         if self.max_lines is not None and self.max_lines <= 0:
